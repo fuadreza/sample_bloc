@@ -5,7 +5,9 @@ import 'package:sample_bloc/feature/main/data/repositories/pos_repository_impl.d
 import 'package:sample_bloc/feature/main/data/services/api/pos_api_service.dart';
 import 'package:sample_bloc/feature/main/data/sources/remote/pos_remote_data_source.dart';
 import 'package:sample_bloc/feature/main/domain/repositories/pos_repository.dart';
+import 'package:sample_bloc/feature/main/domain/usecases/get_locations_usecase.dart';
 import 'package:sample_bloc/feature/main/domain/usecases/login_user_usecase.dart';
+import 'package:sample_bloc/feature/main/presentation/modules/home/home_cubit.dart';
 import 'package:sample_bloc/feature/main/presentation/modules/login/login_cubit.dart';
 
 final GetIt di = GetIt.instance;
@@ -20,6 +22,12 @@ Future<void> init() async {
     ),
   );
 
+  di.registerFactory(
+    () => HomeCubit(
+      getLocationsUseCase: di(),
+    ),
+  );
+
   //endregion
 
 
@@ -27,6 +35,12 @@ Future<void> init() async {
 
   di.registerLazySingleton(
     () => LoginUserUseCase(
+      repository: di(),
+    ),
+  );
+
+  di.registerLazySingleton(
+    () => GetLocationsUseCase(
       repository: di(),
     ),
   );

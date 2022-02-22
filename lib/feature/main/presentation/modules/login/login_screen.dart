@@ -82,7 +82,7 @@ class LoginScreen extends StatelessWidget {
                         showErrorDialog(context, state.message);
                       } else if (state is LoginSuccess) {
                         Navigator.pushReplacement(context, HomeScreen.route());
-                      }
+                      } else { }
                     },
                     builder: (BuildContext ctx, LoginState state) {
                       if (state is LoginLoading) {
