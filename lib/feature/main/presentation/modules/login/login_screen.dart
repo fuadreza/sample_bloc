@@ -16,6 +16,11 @@ class LoginScreen extends StatelessWidget {
   final String title;
   final GlobalKey<FormState> formKey = GlobalKey();
 
+  final SnackBar snackBar = const SnackBar(
+    backgroundColor: Colors.green,
+    content: Text('Login Success!'),
+  );
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -81,6 +86,7 @@ class LoginScreen extends StatelessWidget {
                       if(state is LoginFailed) {
                         showErrorDialog(context, state.message);
                       } else if (state is LoginSuccess) {
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         Navigator.pushReplacement(context, HomeScreen.route());
                       } else { }
                     },
@@ -104,12 +110,6 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 height: 8,
               ),
-
-              // Obx(() =>
-              // controller.loginState is LoginLoading
-              //     ? const CircularProgressIndicator()
-              //     : const SizedBox()
-              // ),
             ],
           ),
         ),
