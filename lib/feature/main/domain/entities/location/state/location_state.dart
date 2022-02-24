@@ -1,9 +1,13 @@
 
 
+import 'package:equatable/equatable.dart';
 import 'package:sample_bloc/feature/main/domain/entities/location/response/location_response.dart';
 
-class LocationState {
-  LocationState();
+class LocationState extends Equatable {
+  const LocationState();
+
+  @override
+  List<Object?> get props => [];
 }
 
 class LocationInit extends LocationState {}
@@ -13,7 +17,7 @@ class LocationLoading extends LocationState {}
 class LocationSuccess extends LocationState {
   final List<LocationResponse> locations;
 
-  LocationSuccess({
+  const LocationSuccess({
     required this.locations,
   });
 }
@@ -21,7 +25,7 @@ class LocationSuccess extends LocationState {
 class LocationFailed extends LocationState {
   final String message;
 
-  LocationFailed({
+  const LocationFailed({
     required this.message,
   });
 }
